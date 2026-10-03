@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卢建平 · 商业视觉设计师 Portfolio</title>
+<style>
+  :root{
+    --bg:#F4F3EF; --ink:#161513; --mut:#83817A; --line:#E1DFD8;
+    --accent:#E2562E; --dark:#161513; --card:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden;
+  }
+  ::selection{background:var(--accent); color:#fff;}
+  img{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{width:90%; max-width:1280px; margin:0 auto;}
+
+  /* ---------- Nav ---------- */
+  nav{position:fixed; top:0; left:0; width:100%; z-index:100; transition:.35s; padding:22px 0;}
+  nav.scrolled{background:rgba(244,243,239,.86); backdrop-filter:blur(12px); padding:14px 0; border-bottom:1px solid var(--line);}
+  .nav-in{display:flex; align-items:center; justify-content:space-between;}
+  .logo{font-weight:800; font-size:19px; letter-spacing:.5px;}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex; align-items:center; gap:34px; font-size:14px; font-weight:500;}
+  .nav-links a{position:relative; opacity:.8; transition:.25s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:-5px; width:0; height:1.5px; background:var(--accent); transition:.3s;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{border:1.5px solid var(--ink); padding:8px 18px; border-radius:40px; font-size:13px; transition:.25s;}
+  .nav-cta:hover{background:var(--ink); color:#fff;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none;border:none;}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);transition:.3s;}
+
+  /* ---------- Hero ---------- */
+  .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 0 60px; position:relative;}
+  .hero-kicker{font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--mut); margin-bottom:26px; display:flex; align-items:center;gap:12px;}
+  .hero-kicker::before{content:""; width:42px; height:1.5px; background:var(--accent);}
+  .hero h1{font-size:clamp(52px,11.5vw,158px); line-height:.98; font-weight:800; letter-spacing:-2px;}
+  .hero h1 .out{ -webkit-text-stroke:2px var(--ink); color:transparent;}
+  .hero h1 .accent{color:var(--accent);}
+  .hero-bottom{display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-top:44px; flex-wrap:wrap;}
+  .hero-sub{max-width:440px; font-size:16px; color:#3c3b37;}
+  .hero-sub b{color:var(--ink);}
+  .hero-img{width:clamp(200px,26vw,360px); border-radius:14px; overflow:hidden; box-shadow:0 24px 60px -20px rgba(0,0,0,.35);}
+  .hero-img img{width:100%; transition:transform .6s;}
+  .hero-img:hover img{transform:scale(1.06);}
+  .scroll-hint{position:absolute; bottom:30px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:2px; color:var(--mut); display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .scroll-hint .line{width:1px; height:44px; background:var(--mut); animation:scrollLine 1.8s infinite;}
+  @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+  /* ---------- Marquee ---------- */
+  .marquee{background:var(--dark); color:#F4F3EF; padding:18px 0; overflow:hidden; white-space:nowrap; transform:rotate(-1.2deg); margin:20px -2vw; width:104vw;}
+  .marquee-track{display:inline-block; animation:marquee 26s linear infinite;}
+  .marquee-track span{font-size:22px; font-weight:700; margin:0 26px;}
+  .marquee-track span i{color:var(--accent); font-style:normal;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- Section ---------- */
+  section{padding:100px 0;}
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:64px; flex-wrap:wrap; gap:10px;}
+  .sec-head h2{font-size:clamp(30px,5vw,56px); font-weight:800; letter-spacing:-1px;}
+  .sec-head .num{font-size:14px; color:var(--mut); letter-spacing:2px;}
+
+  /* ---------- Project ---------- */
+  .project{margin-bottom:120px;}
+  .proj-top{display:flex; align-items:flex-start; gap:24px; margin-bottom:26px; flex-wrap:wrap;}
+  .proj-no{font-size:14px; font-weight:700; color:var(--accent); border:1.5px solid var(--accent); border-radius:50%; width:46px;height:46px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .proj-tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .tag{font-size:11.5px; padding:4px 12px; border-radius:30px; background:#EAE8E1; color:#5b5a54; letter-spacing:.5px;}
+  .proj-title{font-size:clamp(26px,4.4vw,46px); font-weight:800; line-height:1.12; letter-spacing:-.5px;}
+  .proj-year{margin-left:auto; font-size:14px; color:var(--mut); font-weight:500; padding-top:10px;}
+  .proj-layout{display:grid; grid-template-columns:320px 1fr; gap:34px; align-items:start;}
+  .proj-desc{font-size:14.5px; color:#414039; position:sticky; top:110px;}
+  .proj-desc .lead{margin-bottom:14px;}
+  .proj-main{border-radius:14px; overflow:hidden; background:#fff; cursor:zoom-in;}
+  .proj-main img{width:100%; transition:transform .6s;}
+  .proj-main:hover img{transform:scale(1.04);}
+  .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-top:14px;}
+  .g-item{border-radius:10px; overflow:hidden; background:#fff; cursor:zoom-in;}
+  .g-item img{width:100%; height:100%; object-fit:cover; transition:transform .5s;}
+  .g-item:hover img{transform:scale(1.06);}
+  .g-item.contain img{object-fit:contain;}
+
+  /* ---------- On site ---------- */
+  .onsite{background:var(--dark); color:#F1F0EB;}
+  .onsite .sec-head .num{color:#9a988f;}
+  .onsite-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+  .on-item{border-radius:12px; overflow:hidden; cursor:zoom-in; position:relative;}
+  .on-item img{width:100%; transition:transform .6s; filter:saturate(.95);}
+  .on-item:hover img{transform:scale(1.05);}
+  .on-cap{position:absolute; left:14px; bottom:12px; font-size:12.5px; font-weight:600; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.6); letter-spacing:.5px;}
+  .onsite-note{margin-top:40px; font-size:15px; color:#bcbab2; max-width:640px;}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start;}
+  .about-text p{font-size:16px; color:#34332e; margin-bottom:18px;}
+  .about-text .big{font-size:clamp(22px,3vw,32px); font-weight:800; line-height:1.4; color:var(--ink); margin-bottom:26px; letter-spacing:-.5px;}
+  .about-text .big em{color:var(--accent); font-style:normal;}
+  .skill-block{margin-bottom:30px;}
+  .skill-block h4{font-size:12px; letter-spacing:2px; color:var(--mut); text-transform:uppercase; margin-bottom:14px;}
+  .chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{font-size:13px; padding:7px 15px; border:1px solid var(--line); border-radius:30px; background:#fff; transition:.25s;}
+  .chip:hover{border-color:var(--accent); color:var(--accent);}
+  .tools{display:flex; flex-wrap:wrap; gap:10px;}
+  .tool{font-size:13.5px; font-weight:600; padding:9px 16px; background:var(--ink); color:#fff; border-radius:8px;}
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--dark); color:#F4F3EF; text-align:center; padding:130px 0;}
+  .contact-kicker{font-size:13px; letter-spacing:3px; color:#9a988f; margin-bottom:26px;}
+  .contact h2{font-size:clamp(34px,7vw,86px); font-weight:800; line-height:1.08; letter-spacing:-1px; margin-bottom:20px;}
+  .contact h2 .accent{color:var(--accent);}
+  .contact-mail{display:inline-block; font-size:clamp(18px,3vw,30px); font-weight:700; border-bottom:2px solid var(--accent); padding-bottom:6px; margin:24px 0 44px; transition:.3s;}
+  .contact-mail:hover{color:var(--accent);}
+  .contact-list{display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font-size:15px;}
+  .contact-list .c-lab{font-size:11.5px; letter-spacing:2px; color:#8e8c84; display:block; margin-bottom:5px;}
+
+  footer{background:var(--dark); border-top:1px solid #2c2b28; padding:30px 0; color:#8e8c84; font-size:13px;}
+  .foot-in{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  .top-btn{cursor:pointer; transition:.25s;}
+  .top-btn:hover{color:var(--accent);}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(38px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{position:fixed; inset:0; background:rgba(15,14,12,.94); z-index:200; display:none; align-items:center; justify-content:center; padding:40px; cursor:zoom-out;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:92%; max-height:90%; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .lb-close{position:absolute; top:24px; right:32px; color:#fff; font-size:34px; cursor:pointer; line-height:1;}
+  .lb-cap{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:#cfcec7; font-size:13px; letter-spacing:1px;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .proj-layout{grid-template-columns:1fr;}
+    .proj-desc{position:static;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+  }
+  @media (max-width:720px){
+    .nav-links{position:fixed; top:0; right:0; height:100vh; width:74%; max-width:300px; background:var(--bg); flex-direction:column; justify-content:center; gap:30px; font-size:20px; transform:translateX(100%); transition:.4s; box-shadow:-10px 0 40px rgba(0,0,0,.15); padding:40px;}
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:flex; z-index:110;}
+    .nav-toggle.on span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.on span:nth-child(2){opacity:0;}
+    .nav-toggle.on span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    section{padding:70px 0;}
+    .project{margin-bottom:80px;}
+    .proj-year{margin-left:0; width:100%;}
+    .hero-img{width:70vw;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="wrap nav-in">
+    <div class="logo">卢建平<span>.</span>LU JIANPING</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#works">作品</a>
+      <a href="#onsite">现场</a>
+      <a href="#about">关于</a>
+      <a href="#contact">联系</a>
+      <a href="#contact" class="nav-cta">获取简历</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero wrap">
+  <div class="hero-kicker">Commercial Visual Designer · 商业视觉设计师</div>
+  <h1>
+    让商业<br>
+    <span class="out">被</span>看见<span class="accent">.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">我是 <b>卢建平</b>，一名专注<b>商业地产与零售</b>的视觉设计师。从主题策划、主视觉 KV，到全套物料与现场落地，把好创意真正做进生意里。</p>
+    <div class="hero-img">
+      <img src="assets/img/kaihai_cover.jpg" alt="开海节主视觉">
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL<div class="line"></div></div>
+</header>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>主视觉 KV<i>／</i></span><span>商业美陈<i>／</i></span><span>活动全案<i>／</i></span><span>视觉系统<i>／</i></span><span>赛事营销<i>／</i></span><span>IP 形象<i>／</i></span><span>印刷落地<i>／</i></span>
+    <span>主视觉 KV<i>／</i></span><span>商业美陈<i>／</i></span><span>活动全案<i>／</i></span><span>视觉系统<i>／</i></span><span>赛事营销<i>／</i></span><span>IP 形象<i>／</i></span><span>印刷落地<i>／</i></span>
+  </div>
+</div>
+
+<!-- Works -->
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>精选作品</h2>
+      <span class="num">SELECTED WORKS — 07</span>
+    </div>
+
+    <!-- P1 开海节 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">01</div>
+        <div>
+          <div class="proj-tags"><span class="tag">活动全案</span><span class="tag">手绘插画</span><span class="tag">抖音生活服务</span></div>
+          <h3 class="proj-title">心动大连 · 鲜潮秋韵开海记</h3>
+        </div>
+        <span class="proj-year">2026</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">与抖音生活服务"心动之城"合作的城市级开海节视觉。以手绘海洋插画与书法字构建主视觉，延展至道旗、吊牌、地贴、桌贴等全套到店物料。</p>
+          <p>线上话题与线下场景统一，让"心动大连"从屏幕走到街区。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="心动大连 · 开海节主视觉"><img src="assets/img/kaihai_cover.jpg" alt="开海节主视觉"></div>
+          <div class="gallery">
+            <div class="g-item lb" data-cap="开海节 · 道旗"><img src="assets/img/kaihai_daoqi.jpg" alt="道旗"></div>
+            <div class="g-item lb" data-cap="开海节 · 吊牌广告"><img src="assets/img/kaihai_ad1.jpg" alt="吊牌广告"></div>
+            <div class="g-item contain lb" data-cap="开海节 · 主视觉吊牌"><img src="assets/img/kaihai_diaopai.jpg" alt="吊牌"></div>
+            <div class="g-item contain lb" data-cap="开海节 · 地贴"><img src="assets/img/kaihai_ditie.jpg" alt="地贴"></div>
+            <div class="g-item contain lb" data-cap="开海节 · 桌贴"><img src="assets/img/kaihai_zhuotie.jpg" alt="桌贴"></div>
+            <div class="g-item lb" data-cap="开海节 · 文案吊牌"><img src="assets/img/kaihai_diaopai2.jpg" alt="文案吊牌"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P2 燃夏季 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">02</div>
+        <div>
+          <div class="proj-tags"><span class="tag">KV 延展系统</span><span class="tag">双色</span><span class="tag">年中庆</span></div>
+          <h3 class="proj-title">燃夏嗨 GO 季 · 双色 KV 系统</h3>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">为年中营销打造的荧光撞色 KV 系统，一套视觉延展为"夏日即兴出淘""超级年中庆"两个阶段、粉蓝双色。</p>
+          <p>并制定 KV 延展规范，保证多物料、多门店、多阶段的视觉统一。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="燃夏嗨 GO 季 · 阶段一 夏日即兴出淘"><img src="assets/img/ranxia_1.jpg" alt="燃夏季阶段一"></div>
+          <div class="gallery">
+            <div class="g-item lb" data-cap="燃夏嗨 GO 季 · 阶段二 超级年中庆"><img src="assets/img/ranxia_2.jpg" alt="燃夏季阶段二"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P3 珠宝节 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">03</div>
+        <div>
+          <div class="proj-tags"><span class="tag">活动全案</span><span class="tag">高端质感</span><span class="tag">钟表珠宝</span></div>
+          <h3 class="proj-title">第四届珠宝钟表嘉年华</h3>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">以丝绸与水晶质感营造高端氛围，完成主 KV、竖版 KV、倒计时海报、吊幔、灯杆旗、邀请函等全案物料。</p>
+          <p>鸣谢周大福、植村秀等合作品牌，统一全场高端视觉调性。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="第四届珠宝钟表嘉年华 · 主视觉"><img src="assets/img/zhubao_cover.jpg" alt="珠宝节主视觉"></div>
+          <div class="gallery">
+            <div class="g-item contain lb" data-cap="珠宝节 · 竖版 KV"><img src="assets/img/zhubao_vertical.jpg" alt="竖版KV"></div>
+            <div class="g-item lb" data-cap="珠宝节 · 倒计时海报"><img src="assets/img/zhubao_daojishi.jpg" alt="倒计时"></div>
+            <div class="g-item lb" data-cap="珠宝节 · 吊幔"><img src="assets/img/zhubao_diaoman.jpg" alt="吊幔"></div>
+            <div class="g-item lb" data-cap="珠宝节 · 邀请函"><img src="assets/img/zhubao_yaoqinghan.jpg" alt="邀请函"></div>
+            <div class="g-item lb" data-cap="珠宝节 · 灯杆旗"><img src="assets/img/zhubao_dengganqi.jpg" alt="灯杆旗"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P4 中秋国庆 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">04</div>
+        <div>
+          <div class="proj-tags"><span class="tag">节庆 KV</span><span class="tag">红金</span><span class="tag">集团联动</span></div>
+          <h3 class="proj-title">浓情金秋 · 惠满国庆</h3>
+        </div>
+        <span class="proj-year">2026</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">大商集团联动盛惠节庆主视觉，以满月、烟花、红绸与华表营造国庆氛围，历经四版打磨后定稿。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="浓情金秋 · 惠满国庆 主视觉"><img src="assets/img/zhongqiu_cover.jpg" alt="中秋国庆主视觉"></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P5 东北超 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">05</div>
+        <div>
+          <div class="proj-tags"><span class="tag">赛事营销</span><span class="tag">IP 形象</span><span class="tag">广告位</span></div>
+          <h3 class="proj-title">东北城市足球联赛 · 赛事营销视觉</h3>
+        </div>
+        <span class="proj-year">2026</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">为联赛打造助威旗、现场条幅、吉祥物、球迷球衣、赛场条形广告及注水旗等全套营销物料。</p>
+          <p>融合斑海豹城市 IP 与卡尔美品牌，覆盖八个赛场与青泥三店广告位。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="东北超 · 注水旗四色系统"><img src="assets/img/dc_3d_daoqi.jpg" alt="注水旗"></div>
+          <div class="gallery">
+            <div class="g-item lb" data-cap="东北超 · 助威旗与现场条幅"><img src="assets/img/dc_zhuwei1.jpg" alt="助威旗"></div>
+            <div class="g-item contain lb" data-cap="东北超 · 卡通吉祥物"><img src="assets/img/dc_mascot.jpg" alt="吉祥物"></div>
+            <div class="g-item contain lb" data-cap="东北超 · 球迷球衣（正）"><img src="assets/img/dc_qiuyi_front.jpg" alt="球衣正"></div>
+            <div class="g-item contain lb" data-cap="东北超 · 球迷球衣（背）"><img src="assets/img/dc_qiuyi_back.jpg" alt="球衣背"></div>
+            <div class="g-item lb" data-cap="东北超 · 八赛场条形广告规范"><img src="assets/img/dc_ad_dashang.jpg" alt="条形广告"></div>
+            <div class="g-item lb" data-cap="东北超 · 球场广告"><img src="assets/img/dc_stadium.jpg" alt="球场广告"></div>
+            <div class="g-item lb" data-cap="东北超 · 青泥三店广告位"><img src="assets/img/dc_sandian.jpg" alt="三店广告位"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P6 年度视觉 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">06</div>
+        <div>
+          <div class="proj-tags"><span class="tag">品牌视觉</span><span class="tag">年度规划</span><span class="tag">四季系统</span></div>
+          <h3 class="proj-title">大商集团年度视觉 &amp; 四季视觉规划</h3>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">从品牌定位出发制定年度视觉与四季视觉系统，统一全年营销视觉语言，让各档活动"形散而神不散"。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="大商集团 2025 年度视觉规划"><img src="assets/img/niandu_1.jpg" alt="年度视觉封面"></div>
+          <div class="gallery">
+            <div class="g-item lb" data-cap="年度视觉 · 四季系统"><img src="assets/img/niandu_2.jpg" alt="年度视觉2"></div>
+            <div class="g-item lb" data-cap="年度视觉 · 应用延展"><img src="assets/img/niandu_3.jpg" alt="年度视觉3"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- P7 会员卡 -->
+    <article class="project reveal">
+      <div class="proj-top">
+        <div class="proj-no">07</div>
+        <div>
+          <div class="proj-tags"><span class="tag">单品设计</span><span class="tag">礼品卡</span></div>
+          <h3 class="proj-title">新春福字会员卡</h3>
+        </div>
+        <span class="proj-year">2025</span>
+      </div>
+      <div class="proj-layout">
+        <div class="proj-desc">
+          <p class="lead">春节主题会员卡 / 礼品卡卡面设计，融合福字剪纸、灯笼与祥云纹样，年味与品牌感兼具。</p>
+        </div>
+        <div>
+          <div class="proj-main lb" data-cap="新春福字会员卡"><img src="assets/img/huiyuan.jpg" alt="会员卡"></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- On site -->
+<section id="onsite" class="onsite">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>现场落地</h2>
+      <span class="num">ON SITE</span>
+    </div>
+    <div class="onsite-grid reveal">
+      <div class="on-item lb" data-cap="青泥洼商业街牌坊 · 夏季视觉"><img src="assets/img/site_mentou_xia.jpg" alt="夏季门头"><span class="on-cap">牌坊 · 夏季视觉</span></div>
+      <div class="on-item lb" data-cap="青泥洼商业街牌坊 · 秋季视觉"><img src="assets/img/site_mentou_qiu.jpg" alt="秋季门头"><span class="on-cap">牌坊 · 秋季视觉</span></div>
+      <div class="on-item lb" data-cap="步行街整体视觉包装 · 夏季"><img src="assets/img/site_street_xia.jpg" alt="夏季街景"><span class="on-cap">街区 · 整体包装</span></div>
+      <div class="on-item lb" data-cap="步行街灯杆道旗 · 秋季"><img src="assets/img/site_denggan_qiu.jpg" alt="秋季道旗"><span class="on-cap">道旗 · 秋季视觉</span></div>
+    </div>
+    <p class="onsite-note reveal">视觉不止于屏幕。以下为设计在青泥洼商业街的真实落地呈现——从牌坊、道旗到整条街区的氛围营造。</p>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text reveal">
+      <p class="big">商业视觉设计师，<br>把<em>创意、画面与落地</em><br>做成一件事。</p>
+      <p>我专注商业地产与零售行业的营销视觉，擅长从主题策划、主视觉 KV 到全套物料与现场执行的全流程。</p>
+      <p>风格横跨节庆喜庆、治愈插画、高端质感与年轻潮流；熟悉印刷、喷绘、美陈工艺与供应商协作，能独立把方案从概念推进到现场。</p>
+    </div>
+    <div class="reveal">
+      <div class="skill-block">
+        <h4>能力 Capabilities</h4>
+        <div class="chips">
+          <span class="chip">主视觉 KV</span><span class="chip">KV 延展系统</span><span class="chip">商业美陈</span>
+          <span class="chip">活动全案</span><span class="chip">品牌视觉</span><span class="chip">IP 形象</span>
+          <span class="chip">印刷工艺</span><span class="chip">AI 辅助出图</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h4>软件 Tools</h4>
+        <div class="tools">
+          <span class="tool">Photoshop</span><span class="tool">Illustrator</span>
+          <span class="tool">PowerPoint</span><span class="tool">即梦 AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-kicker reveal">GET IN TOUCH</div>
+    <h2 class="reveal">一起把好视觉<br><span class="accent">做进生意里</span></h2>
+    <a class="contact-mail reveal" href="mailto:1257907634@qq.com">1257907634@qq.com</a>
+    <div class="contact-list reveal">
+      <div><span class="c-lab">微信 WECHAT</span>ASSASSIN2586</div>
+      <div><span class="c-lab">电话 PHONE</span>151-4230-2012</div>
+      <div><span class="c-lab">城市 CITY</span>大连 · Dalian</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 卢建平 LU JIANPING · Commercial Visual Designer</span>
+    <span class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">回到顶部 ↑</span>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lb-close" id="lbClose">×</span>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+(function(){
+  // Nav scroll state
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>40); }
+  window.addEventListener('scroll',onScroll); onScroll();
+
+  // Mobile menu
+  var toggle=document.getElementById('navToggle'), links=document.getElementById('navLinks');
+  toggle.addEventListener('click',function(){
+    links.classList.toggle('open'); toggle.classList.toggle('on');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ links.classList.remove('open'); toggle.classList.remove('on'); });
+  });
+
+  // Reveal on scroll
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Lightbox
+  var lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'),
+      lbCap=document.getElementById('lbCap');
+  function open(src,cap){ lbImg.src=src; lbCap.textContent=cap||''; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+  document.querySelectorAll('.lb').forEach(function(el){
+    el.addEventListener('click',function(){
+      var img=el.querySelector('img');
+      open(img.src, el.getAttribute('data-cap'));
+    });
+  });
+  lb.addEventListener('click',close);
+  document.getElementById('lbClose').addEventListener('click',function(e){e.stopPropagation();close();});
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
+</body>
+</html>
